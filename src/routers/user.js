@@ -7,11 +7,19 @@ router.post('/users', async (req, res) => {
 
     try {
         await user.save()
-        res.status(201).send(user)
+        const token = user.generateAuthToken()
+        res.status(201).send({user, token})
     } catch (e) {
         res.status(400).send(e)
     }
 })
+
+// signup user to have auth tokens
+// 1. generate auth token for the saved user
+// 2. send back both token and user
+// 3. create a new user from postman and confirm the token is there
+
+
 
 router.post('/users/login', async (req, res) => {
     try {
