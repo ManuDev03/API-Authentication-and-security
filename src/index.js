@@ -6,18 +6,20 @@ const taskRouter = require('./routers/task')
 const app = express()
 const port = process.env.PORT || 3000
 
-// app.use((req, res, next) => {
-   
-
-// })
-
-// middleware for maintains mode 
-// 1. register a new middleware function
-// 2. send back a maintance message with 503 status code
-// 3. try your request from server and confirm status 
-
+// blocking specific requests
 app.use((req, res, next) => {
-    res.status(503).send('Site is currently down check back soon!')
+    console.log(req.method, req.path)
+
+    if(req.method === 'GET')
+    {
+        res.send('GET request is blocked')
+    }
+    else 
+    {
+        next()
+    }
+    
+
 })
 
 app.use(express.json())
