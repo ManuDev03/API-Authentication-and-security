@@ -6,21 +6,7 @@ const taskRouter = require('./routers/task')
 const app = express()
 const port = process.env.PORT || 3000
 
-// blocking specific requests
-app.use((req, res, next) => {
-    console.log(req.method, req.path)
 
-    if(req.method === 'GET')
-    {
-        res.send('GET request is blocked')
-    }
-    else 
-    {
-        next()
-    }
-    
-
-})
 
 app.use(express.json())
 app.use(userRouter)
