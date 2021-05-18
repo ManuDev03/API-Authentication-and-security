@@ -17,6 +17,17 @@ router.post('/tasks', auth, async (req, res) => {
     }
 })
 
+
+router.get('/tasksforall',  async (req, res) => {
+    try {
+        
+        const tasks = await Task.find({})
+        res.send(tasks)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.get('/tasks', auth,  async (req, res) => {
     try {
         
